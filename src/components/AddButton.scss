@@ -1,0 +1,21 @@
+.btn {
+  position: relative;
+  max-width: 216px;
+  max-height: 44px;
+  padding: 12px 24px;
+  padding-left: 68px;
+  border: 1px solid #9873ff;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+  color: #9873ff;
+  background-color: transparent;
+  cursor: pointer;
+  svg {
+    position: absolute;
+    fill: currentColor;
+    left: 0;
+  }
+}
+

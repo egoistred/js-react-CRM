@@ -1,0 +1,12 @@
+.search {
+  max-width: 581px;
+  flex-grow: 1;
+  padding: 13px 15px;
+  border: 1px solid #333333;
+}
+
+.search::placeholder {
+  font-family: "Open Sans";
+  font-size: 14px;
+  line-height: 19px;
+}

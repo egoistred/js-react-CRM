@@ -5,18 +5,17 @@ import ky from "ky";
 import { Client } from "./CRMTable";
 import { useState } from "react";
 import { useFormik } from "formik";
-import { uuid } from 'uuidv4'
+import { uuid } from "uuidv4";
 
 const options = [
-  { value: "tel", label: "Телефон" },
-  { value: "addTel", label: "Доп. телефон" },
-  { value: "email", label: "Email" },
-  { value: "vk", label: "Vk" },
-  { value: "fb", label: "Facebook" },
+  { value: "Телефон", label: "Телефон" },
+  { value: "Телефон", label: "Доп. телефон" },
+  { value: "Email", label: "Email" },
+  { value: "VK", label: "Vk" },
+  { value: "Facebook", label: "Facebook" },
 ];
 
-const contacts: number[] = [];
-
+const contactsArr: number[] = [];
 
 export function AddForm({
   clients,
@@ -25,8 +24,6 @@ export function AddForm({
   clients: Client[];
   setClients: Function;
 }) {
-  const { register, handleSubmit } = useForm();
-
   const formik = useFormik({
     initialValues: {
       surname: "",
@@ -34,13 +31,17 @@ export function AddForm({
       lastName: "",
       contacts: [
         {
-        type: "",
-        value: "",
-      }
+          type: "",
+          value: "",
+        }
       ],
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
+      values = await ky
+        .post("http://localhost:3000/api/clients", { json: values })
+        .json();
+      setClients([...clients, values]);
     },
   });
 
@@ -51,17 +52,21 @@ export function AddForm({
 
   // const onSubmit = async (data: Client) => {
   //   let clientContacts = console.log(data);
-  // data = await ky
-  //   .post("http://localhost:3000/api/clients", { json: data })
-  //   .json();
-  // setClients([...clients, data]);
+
   // };
 
   function addHandler(event: any) {
     event.preventDefault();
-    if (contacts.length > 4) return;
     setCount(count + 1);
-    contacts.push(count);
+    contactsArr.push(count);
+    let newContact = {
+      type: "",
+      value: "",
+    };
+    if ((formik.values.contacts.length) > 1) {
+      formik.values.contacts = [...formik.values.contacts, newContact];
+    }
+ 
     setAddContact(true);
   }
 
@@ -100,16 +105,20 @@ export function AddForm({
         />
         <div className={`select-wrapper ${addContact ? "show" : ""}`}>
           {addContact &&
-            contacts.map(() => (
+            contactsArr.map((contact, i) => (
               <>
                 <Select
-                defaultValue={options[0]}
-                options={options} />
+                  defaultValue={options[0]}
+                  options={options}
+                  name={`contacts[${i}].type`}
+                  onChange={(selected) =>
+                    formik.setFieldValue(`contacts[${i}].type`, selected?.value)
+                  }
+                />
                 <input
                   type="text"
-                  value={formik.values.contacts[0].value}
                   onChange={formik.handleChange}
-                  name="contacts"
+                  name={`contacts[${i}].value`}
                 />
                 <button>&times;</button>
               </>

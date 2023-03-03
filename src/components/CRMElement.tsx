@@ -1,4 +1,5 @@
 import React from "react";
+import { ReactSVG } from "react-svg";
 import { Client } from "./CRMTable";
 
 export function CRMElement({
@@ -12,9 +13,6 @@ export function CRMElement({
   setChangeModal: Function;
   getId: Function;
 }) {
-
-
-
   function deleteHandler() {
     setDeleteModal(true);
     let id = document.getElementById(`${client.id}`);
@@ -25,8 +23,9 @@ export function CRMElement({
     let date = new Date(fullTime),
       year = date.getFullYear(),
       month = (date.getMonth() + 1).toString(),
-      day = date.getDate();
-      if (month.length < 2) month = "0" + month;
+      day = date.getDate().toString();
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
 
     return `${day}.${month}.${year}`;
   }
@@ -35,9 +34,7 @@ export function CRMElement({
     let date = new Date(fullTime),
       hours = date.getHours(),
       minutes = date.getMinutes().toString();
-      if (minutes.length < 10) {
-        minutes = "0" + minutes;
-      }
+    if (minutes.length < 10) minutes = "0" + minutes;
     return `${hours}:${minutes}`;
   }
 
@@ -53,7 +50,13 @@ export function CRMElement({
         <span>{getDate(client.updatedAt)}</span>
         <span>{getHours(client.updatedAt)}</span>
       </td>
-      <td></td>
+      <td>
+        {client?.contacts?.length > 0 && 
+        client?.contacts.map((contact, index) => (
+          <ReactSVG src=""></ReactSVG>
+        )
+        }
+      </td>
       <td>
         <button onClick={() => setChangeModal(true)}>Изменить</button>
         <button onClick={deleteHandler}>Удалить</button>

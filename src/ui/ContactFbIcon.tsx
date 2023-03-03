@@ -1,7 +1,7 @@
 import React from "react";
 import { Tooltip } from "react-tooltip";
 
-function ContactFbIcon({content, type}: any) {
+function ContactFbIcon({content, type, id}: any) {
   return (
     <>
     <a href={type}>
@@ -11,7 +11,7 @@ function ContactFbIcon({content, type}: any) {
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="tooltip-fb"
+      className={`tooltip-fb${id}`}
     >
       <g opacity="0.7">
         <path
@@ -21,7 +21,7 @@ function ContactFbIcon({content, type}: any) {
       </g>
     </svg>
     </a>
-    <Tooltip anchorSelect=".tooltip-fb" content={content}/>
+    <Tooltip anchorSelect={`.tooltip-fb${id}`} content={content}/>
     </>
   );
 }

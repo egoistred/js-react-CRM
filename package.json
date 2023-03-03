@@ -15,7 +15,8 @@
     "react-select": "^5.7.0",
     "react-svg": "^16.1.4",
     "react-tooltip": "^5.8.3",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

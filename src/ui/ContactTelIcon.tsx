@@ -1,7 +1,7 @@
 import React from "react";
 import { Tooltip } from "react-tooltip";
 
-function ContactTelIcon({content, type}: any) {
+function ContactTelIcon({content, type, id}: any) {
   return (
     <>
     <a href={type}>
@@ -11,7 +11,7 @@ function ContactTelIcon({content, type}: any) {
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="tooltip-tel"
+      className={`tooltip-tel${id}`}
     >
       <g opacity="0.7">
         <circle cx="8" cy="8" r="8" fill="#9873FF" />
@@ -22,7 +22,7 @@ function ContactTelIcon({content, type}: any) {
       </g>
     </svg>
     </a>
-    <Tooltip anchorSelect=".tooltip-tel" content={content}/>
+    <Tooltip anchorSelect={`.tooltip-tel${id}`} content={content}/>
     </>
   );
 }

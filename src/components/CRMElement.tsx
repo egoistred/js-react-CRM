@@ -7,7 +7,6 @@ import ContactEmailIcon from "../ui/ContactEmailIcon";
 import ContactVkIcon from "../ui/ContactVkIcon";
 import ContactFbIcon from "../ui/ContactFbIcon";
 
-
 export function CRMElement({
   client,
   setDeleteModal,
@@ -58,13 +57,36 @@ export function CRMElement({
         <span>{getHours(client.updatedAt)}</span>
       </td>
       <td>
-      {client?.contacts?.length > 0 && 
-        client?.contacts.map(contact => (
-        (contact.type === ('Телефон' || 'ДопТелефон')) ? <ContactTelIcon content={`${contact.value}`} type={`tel:${contact.value}`}/>:
-        (contact.type === 'Email') ? <ContactEmailIcon content={`${contact.value}`} type={`mailto:${contact.value}`}/>:
-        (contact.type === 'VK') ?  <ContactVkIcon content={`${contact.value}`} type={`${contact.value}`}/>:
-        (contact.type === 'Facebook') ? <ContactFbIcon content={`${contact.value}`} type={`${contact.value}`}/> : ''
-        ))}
+        {client?.contacts?.length > 0 &&
+          client?.contacts.map((contact) =>
+            contact.type === ("Телефон" || "ДопТелефон") ? (
+              <ContactTelIcon
+                content={`${contact.value}`}
+                type={`tel:${contact.value}`}
+                id={client.id}
+              />
+            ) : contact.type === "Email" ? (
+              <ContactEmailIcon
+                content={`${contact.value}`}
+                type={`mailto:${contact.value}`}
+                id={client.id}
+              />
+            ) : contact.type === "VK" ? (
+              <ContactVkIcon
+                content={`${contact.value}`}
+                type={`${contact.value}`}
+                id={client.id}
+              />
+            ) : contact.type === "Facebook" ? (
+              <ContactFbIcon
+                content={`${contact.value}`}
+                type={`${contact.value}`}
+                id={client.id}
+              />
+            ) : (
+              ""
+            )
+          )}
       </td>
       <td>
         <button onClick={() => setChangeModal(true)}>Изменить</button>

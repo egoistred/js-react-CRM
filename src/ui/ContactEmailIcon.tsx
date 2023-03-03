@@ -1,7 +1,7 @@
 import React from "react";
 import { Tooltip } from "react-tooltip";
 
-function ContactEmailIcon({content, type}: any) {
+function ContactEmailIcon({content, type, id}: any) {
   return (
     <>
     <a href={type}>
@@ -11,7 +11,7 @@ function ContactEmailIcon({content, type}: any) {
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="tooltip-mail"
+      className={`tooltip-mail${id}`}
     >
       <path
         opacity="0.7"
@@ -22,7 +22,7 @@ function ContactEmailIcon({content, type}: any) {
       />
     </svg>
     </a>
-    <Tooltip anchorSelect=".tooltip-mail" content={content}/>
+    <Tooltip anchorSelect={`.tooltip-mail${id}`} content={content}/>
     </>
   );
 }

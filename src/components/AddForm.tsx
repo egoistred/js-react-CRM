@@ -5,7 +5,7 @@ import ky from "ky";
 import { Client } from "./CRMTable";
 import { useState } from "react";
 import { useFormik } from "formik";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 const options = [
   { value: "Телефон", label: "Телефон" },
@@ -25,20 +25,25 @@ export function AddForm({
   setClients: Function;
 }) {
   const SignupSchema = Yup.object().shape({
-      surname: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-      name: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-       lastName: Yup.string()
-         .min(2, 'Too Short!')
-         .max(50, 'Too Long!')
-         .required('Required'),
-     });
-
+    surname: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    name: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    lastName: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    contacts: Yup.array().of(
+      Yup.object().shape({
+        type: Yup.string().required(),
+        value: Yup.string().required(),
+      })
+    )
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -47,18 +52,27 @@ export function AddForm({
       lastName: "",
       contacts: [
         {
-          type: "",
+          type: "Телефон",
           value: "",
-        }
+        },
       ],
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
-      console.log(values);
-      values = await ky
-        .post("http://localhost:3000/api/clients", { json: values })
-        .json();
-      setClients([...clients, values]);
+      if (values.contacts[0].value.length === 0) {
+        let pushClient = { ...values };
+        delete pushClient.contacts;
+        console.log(pushClient);
+        pushClient = await ky
+          .post("http://localhost:3000/api/clients", { json: pushClient })
+          .json();
+        setClients([...clients, pushClient]);
+      } else {
+        values = await ky
+          .post("http://localhost:3000/api/clients", { json: values })
+          .json();
+        setClients([...clients, values]);
+      }
     },
   });
 
@@ -80,10 +94,10 @@ export function AddForm({
       type: "",
       value: "",
     };
-    if ((formik.values.contacts.length) > 1) {
+    if (formik.values.contacts.length > 1) {
       formik.values.contacts = [...formik.values.contacts, newContact];
     }
- 
+
     setAddContact(true);
   }
 

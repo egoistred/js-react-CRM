@@ -1,6 +1,12 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import { Client } from "./CRMTable";
+import ContactDefaultIcon from "../ui/ContactDefaultIcon";
+import ContactTelIcon from "../ui/ContactTelIcon";
+import ContactEmailIcon from "../ui/ContactEmailIcon";
+import ContactVkIcon from "../ui/ContactVkIcon";
+import ContactFbIcon from "../ui/ContactFbIcon";
+
 
 export function CRMElement({
   client,
@@ -32,9 +38,10 @@ export function CRMElement({
 
   function getHours(fullTime: string) {
     let date = new Date(fullTime),
-      hours = date.getHours(),
+      hours = date.getHours().toString(),
       minutes = date.getMinutes().toString();
-    if (minutes.length < 10) minutes = "0" + minutes;
+    if (minutes.length < 2) minutes = "0" + minutes;
+    if (hours.length < 2) hours = "0" + hours;
     return `${hours}:${minutes}`;
   }
 
@@ -51,11 +58,13 @@ export function CRMElement({
         <span>{getHours(client.updatedAt)}</span>
       </td>
       <td>
-        {client?.contacts?.length > 0 && 
-        client?.contacts.map((contact, index) => (
-          <ReactSVG src=""></ReactSVG>
-        )
-        }
+      {client?.contacts?.length > 0 && 
+        client?.contacts.map(contact => (
+        (contact.type === ('Телефон' || 'ДопТелефон')) ? <ContactTelIcon content={`${contact.value}`} type={`tel:${contact.value}`}/>:
+        (contact.type === 'Email') ? <ContactEmailIcon content={`${contact.value}`} type={`mailto:${contact.value}`}/>:
+        (contact.type === 'VK') ?  <ContactVkIcon content={`${contact.value}`} type={`${contact.value}`}/>:
+        (contact.type === 'Facebook') ? <ContactFbIcon content={`${contact.value}`} type={`${contact.value}`}/> : ''
+        ))}
       </td>
       <td>
         <button onClick={() => setChangeModal(true)}>Изменить</button>

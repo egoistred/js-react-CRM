@@ -9,7 +9,7 @@ import { uuid } from "uuidv4";
 
 const options = [
   { value: "Телефон", label: "Телефон" },
-  { value: "Телефон", label: "Доп. телефон" },
+  { value: "ДопТелефон", label: "Доп. телефон" },
   { value: "Email", label: "Email" },
   { value: "VK", label: "Vk" },
   { value: "Facebook", label: "Facebook" },

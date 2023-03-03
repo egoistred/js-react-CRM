@@ -8,7 +8,10 @@ export interface Client {
   name: string;
   surname: string;
   lastName: string;
-  contacts?: { serv: string; value: string }[];
+  contacts?: {
+     type: string,
+     value: string 
+}[];
 }
 
 export function CRMTable({

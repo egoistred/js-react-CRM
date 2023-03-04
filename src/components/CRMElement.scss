@@ -1,0 +1,103 @@
+.table_row {
+    height: 60px;
+    padding: 20px 0;
+    border-top: 1px solid #C8C5D1;
+    border-bottom: 1px solid #C8C5D1;
+}
+
+.table_row:first-child {
+    border-top: 0;
+}
+
+.fullname,
+.date,
+.hours {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #333333;
+  background-color: none;
+}
+
+.id,
+.hours {
+  color: #b0b0b0;
+}
+
+.change_btn,
+.delete_btn {
+position: relative;
+  border: none;
+  background-color: #fff;
+  outline: none;
+  color: #333333;
+  padding-left: 18px;
+}
+
+.change_btn {
+    padding-right: 38px;
+}
+
+.change_btn::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-image: url(../assets/edit.svg);
+    left: 0;
+}
+
+.delete_btn::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-image: url(../assets/delete.svg);
+    left: 0;
+}
+
+
+
+.date {
+    padding-right: 7px;
+}
+
+.contacts-wrapper {
+    display: flex;
+    width: 108px;
+    flex-wrap: wrap;
+    gap: 7px;
+    a {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.contacts {
+    width: 162px;
+}
+
+.id {
+    font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+width: 100px;
+padding-left: 20px;
+}
+
+.fullname {
+    width: 360px;
+}
+
+.time_created{
+    width: 170px;
+}
+
+
+.time_changed {
+    width: 160px;
+}
+
+.btn_wrapper {
+    width: 207px;
+}

@@ -6,8 +6,6 @@ function DeleteForm({id, getClients, clients }: {id: string, getClients: Functio
 
   async function handleDelete(e: any) {
     ky.delete(`http://localhost:3000/api/clients/${id}`)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
     clients = await ky("http://localhost:3000/api/clients").json();
     getClients(clients);
   }

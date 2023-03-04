@@ -2,4 +2,13 @@ table {
     width: 100%;
     margin: 0;
     padding: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: left;
+}
+
+.tbody {
+    background-color: #fff;
+    border-color: #fff;
+
 }

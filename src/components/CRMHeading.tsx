@@ -2,9 +2,9 @@ import React from "react";
 
 export function CRMHeading() {
   return (
-    <thead>
+    <thead className="thead">
       <tr>
-        <td>ID</td>
+        <td className="id">ID</td>
         <td>Фамилия Имя Отчество</td>
         <td>Дата и время создания</td>
         <td>Последние изменения</td>

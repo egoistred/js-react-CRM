@@ -14,11 +14,15 @@ function App() {
   const [deleteModal, setDeleteModal] = useState(false);
   const [changeModal, setChangeModal] = useState(false);
   const [clients, setClients] = useState([]);
-
   const [id, setId] = useState("");
+  const [client, setClient] = useState({});
   
   const getId = (newId: string) => {
     setId(newId);
+  };
+
+  const getClient = (client: string) => {
+    setClient(client);
   };
 
 
@@ -43,16 +47,17 @@ function App() {
               setDeleteModal={() => setDeleteModal(true)}
               setChangeModal={() => setChangeModal(true)}
               getId={getId}
+              getClient={getClient}
             />
             <AddButton onClick={() => setAddModal(true)} />
             <Modal open={addModal} onClose={() => setAddModal(false)}>
               <AddForm clients={clients} setClients={setClients} />
             </Modal>
             <Modal open={deleteModal} onClose={() => setDeleteModal(false)}>
-              <DeleteForm id={id} getClients={getClients} clients={clients}></DeleteForm>
+              <DeleteForm id={id} getClients={getClients} clients={clients} />
             </Modal>
             <Modal open={changeModal} onClose={() => setChangeModal(false)}>
-              <ChangeForm />
+              <ChangeForm client={client} getClients={getClients} clients={clients} />
             </Modal>
           </div>
         </section>

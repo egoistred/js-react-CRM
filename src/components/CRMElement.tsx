@@ -12,16 +12,26 @@ export function CRMElement({
   setDeleteModal,
   setChangeModal,
   getId,
+  getClient,
 }: {
   client: Client;
   setDeleteModal: Function;
   setChangeModal: Function;
   getId: Function;
+  getClient: Function;
 }) {
   function deleteHandler() {
     setDeleteModal(true);
     let id = document.getElementById(`${client.id}`);
     getId(id?.id);
+    getClient(client);
+  }
+  function changeHandler() {
+    setChangeModal(true);
+    let id = document.getElementById(`${client.id}`);
+    getId(id?.id);
+    getClient(client);
+    console.log(client);
   }
 
   function getDate(fullTime: string) {
@@ -45,40 +55,45 @@ export function CRMElement({
   }
 
   return (
-    <tr id={client.id}>
-      <td>{client.id}</td>
-      <td>{`${client.surname} ${client.name} ${client.lastName}`}</td>
-      <td>
-        <span>{getDate(client.createdAt)}</span>
-        <span>{getHours(client.createdAt)}</span>
+    <tr id={client.id} className="table_row">
+      <td className="id">{client.id.slice(0, 6)}</td>
+      <td className="fullname">{`${client.surname} ${client.name} ${client.lastName}`}</td>
+      <td className="time_created">
+        <span className="date">{getDate(client.createdAt)}</span>
+        <span className="hours">{getHours(client.createdAt)}</span>
       </td>
-      <td>
-        <span>{getDate(client.updatedAt)}</span>
-        <span>{getHours(client.updatedAt)}</span>
+      <td className="time_changed">
+        <span className="date">{getDate(client.updatedAt)}</span>
+        <span className="hours">{getHours(client.updatedAt)}</span>
       </td>
-      <td>
+      <td className="contacts">
+        <div className="contacts-wrapper">
         {client?.contacts?.length > 0 &&
-          client?.contacts.map((contact) =>
+          client?.contacts.map((contact, i) =>
             contact.type === ("Телефон" || "ДопТелефон") ? (
               <ContactTelIcon
+                key={i}
                 content={`${contact.value}`}
                 type={`tel:${contact.value}`}
                 id={client.id}
               />
             ) : contact.type === "Email" ? (
               <ContactEmailIcon
+                key={i}
                 content={`${contact.value}`}
                 type={`mailto:${contact.value}`}
                 id={client.id}
               />
             ) : contact.type === "VK" ? (
               <ContactVkIcon
+                key={i}
                 content={`${contact.value}`}
                 type={`${contact.value}`}
                 id={client.id}
               />
             ) : contact.type === "Facebook" ? (
               <ContactFbIcon
+                key={i}
                 content={`${contact.value}`}
                 type={`${contact.value}`}
                 id={client.id}
@@ -87,10 +102,11 @@ export function CRMElement({
               ""
             )
           )}
+          </div>
       </td>
-      <td>
-        <button onClick={() => setChangeModal(true)}>Изменить</button>
-        <button onClick={deleteHandler}>Удалить</button>
+      <td className="btn_wrapper">
+        <button className="change_btn" onClick={changeHandler}>Изменить</button>
+        <button className="delete_btn" onClick={deleteHandler}>Удалить</button>
       </td>
     </tr>
   );

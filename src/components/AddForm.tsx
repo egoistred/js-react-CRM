@@ -28,21 +28,21 @@ export function AddForm({
     surname: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("Required"),
+      .required("Введите Фамилию "),
     name: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("Required"),
+      .required("Введите имя "),
     lastName: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("Required"),
+      .required("Введите отчество"),
     contacts: Yup.array().of(
       Yup.object().shape({
         type: Yup.string().required(),
-        value: Yup.string().required(),
+        value: Yup.string().required("Введите хотя бы 1 контакт"),
       })
-    )
+    ),
   });
 
   const formik = useFormik({
@@ -52,39 +52,23 @@ export function AddForm({
       lastName: "",
       contacts: [
         {
-          type: "Телефон",
+          type: "Телефон  ",
           value: "",
         },
       ],
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
-      if (values.contacts[0].value.length === 0) {
-        let pushClient = { ...values };
-        delete pushClient.contacts;
-        console.log(pushClient);
-        pushClient = await ky
-          .post("http://localhost:3000/api/clients", { json: pushClient })
-          .json();
-        setClients([...clients, pushClient]);
-      } else {
-        values = await ky
-          .post("http://localhost:3000/api/clients", { json: values })
-          .json();
-        setClients([...clients, values]);
-      }
+      console.log(values);
+      values = await ky
+        .post("http://localhost:3000/api/clients", { json: values })
+        .json();
+      setClients([...clients, values]);
     },
   });
 
   const [addContact, setAddContact] = useState(false);
-  const [contact, setContact] = useState("tel");
   const [count, setCount] = useState(1);
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  // const onSubmit = async (data: Client) => {
-  //   let clientContacts = console.log(data);
-
-  // };
 
   function addHandler(event: any) {
     event.preventDefault();
@@ -159,6 +143,12 @@ export function AddForm({
         <a href="" onClick={addHandler}>
           Добавить контакт
         </a>
+        <p className={`errors ${formik.errors.surname && 'show'}`}>
+          <span className="error">{`${formik.errors.name ? formik.errors.name: ''}`}</span>
+          <span className="error">{`${formik.errors.surname ? formik.errors.surname: ''}`}</span>
+          <span className="error">{`${formik.errors.lastName ? formik.errors.lastName: ''}`}</span>     
+          <span className="error">{`${formik.errors.contacts ? "Введите хотя бы 1 контакт" : ''}`}</span>     
+        </p>
         <button className="form__submit" type="submit">
           Сохранить
         </button>

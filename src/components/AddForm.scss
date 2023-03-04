@@ -112,4 +112,14 @@
   background-color: #C8C5D1;
 }
 
+.errors {
+  display: none;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  color: #F06A4D;
+}
 
+.errors.show {
+  display: flex;
+}

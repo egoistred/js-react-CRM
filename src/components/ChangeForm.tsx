@@ -12,9 +12,8 @@ const options = [
   { value: "Email", label: "Email" },
   { value: "VK", label: "Vk" },
   { value: "Facebook", label: "Facebook" },
+  { value: "Другое", label: "Другое" },
 ];
-
-const contactsArr: number[] = [];
 
 export default function ChangeForm({
   getClients,
@@ -45,40 +44,36 @@ export default function ChangeForm({
       })
     ),
   });
-  console.log(client);
 
   const formik = useFormik({
     initialValues: {
       surname: client.surname,
       name: client.name,
       lastName: client.lastName,
-      contacts: [
-        {
-          type: "Телефон",
-          value: "",
-        },
-      ],
+      contacts: client?.contacts.map((contact) => ({
+        type: contact.type,
+        value: contact.value,
+      })),
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
-        values = await ky
-          .patch(`http://localhost:3000/api/clients/${client.id}`, {
-            json: values,
-          })
-          .json();
-        getClients([...clients, values]);
+      values = await ky
+        .patch(`http://localhost:3000/api/clients/${client.id}`, {
+          json: values,
+        })
+        .json();
+      getClients([...clients, values]);
     },
   });
 
-  const [addContact, setAddContact] = useState(false);
-  const [contact, setContact] = useState("tel");
-  const [count, setCount] = useState(1);
-  const [selectedOption, setSelectedOption] = useState(null);
+  let contactsArr: number[] = [];
+  for (let i = 0; i < client?.contacts?.length; i++) {
+    contactsArr.push(i);
+  }
 
   function addHandler(event: any) {
     event.preventDefault();
-    setCount(count + 1);
-    contactsArr.push(count);
+    contactsArr.push(1)
     let newContact = {
       type: "",
       value: "",
@@ -86,12 +81,12 @@ export default function ChangeForm({
     if (formik.values.contacts.length > 1) {
       formik.values.contacts = [...formik.values.contacts, newContact];
     }
-    setAddContact(true);
   }
 
   return (
     <>
-      <h2 className="form__heading">Новый клиент</h2>
+      <h2 className="form__heading">Изменить данные</h2>
+      <span>{`ID: ${client.id.slice(0, 6)}`}</span>
       <form
         key={"changeform"}
         action="POST"
@@ -122,26 +117,27 @@ export default function ChangeForm({
           placeholder="Отчество"
           type="text"
         />
-        <div className={`select-wrapper ${addContact ? "show" : ""}`}>
-          {addContact &&
-            contactsArr.map((contact, i) => (
-              <>
-                <Select
-                  defaultValue={options[0]}
-                  options={options}
-                  name={`contacts[${i}].type`}
-                  onChange={(selected) =>
-                    formik.setFieldValue(`contacts[${i}].type`, selected?.value)
-                  }
-                />
-                <input
-                  type="text"
-                  onChange={formik.handleChange}
-                  name={`contacts[${i}].value`}
-                />
-                <button>&times;</button>
-              </>
-            ))}
+        <div className={`select-wrapper show`}>
+          {contactsArr.map((contact, i) => (
+            <>
+              <Select
+                defaultValue={options[0]}
+                options={options}
+                name={`contacts[${i}].type`}
+                onChange={(selected) =>
+                  formik.setFieldValue(`contacts[${i}].type`, selected?.value)
+                }
+                key={i}
+              />
+              <input
+                type="text"
+                onChange={formik.handleChange}
+                name={`contacts[${i}].value`}
+                value={formik.values.contacts[i].value}
+              />
+              <button>&times;</button>
+            </>
+          ))}
         </div>
 
         <a href="" onClick={addHandler}>

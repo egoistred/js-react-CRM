@@ -1,12 +1,12 @@
 .table_row {
-    height: 60px;
-    padding: 20px 0;
-    border-top: 1px solid #C8C5D1;
-    border-bottom: 1px solid #C8C5D1;
+  height: 60px;
+  padding: 20px 0;
+  border-top: 1px solid #c8c5d1;
+  border-bottom: 1px solid #c8c5d1;
 }
 
 .table_row:first-child {
-    border-top: 0;
+  border-top: 0;
 }
 
 .fullname,
@@ -26,78 +26,95 @@
 
 .change_btn,
 .delete_btn {
-position: relative;
+  position: relative;
   border: none;
   background-color: #fff;
   outline: none;
   color: #333333;
   padding-left: 18px;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
 }
 
 .change_btn {
-    padding-right: 38px;
+  padding-right: 38px;
 }
 
 .change_btn::before {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background-image: url(../assets/edit.svg);
-    left: 0;
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-image: url(../assets/edit.svg);
+  left: 0;
 }
 
 .delete_btn::before {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background-image: url(../assets/delete.svg);
-    left: 0;
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-image: url(../assets/delete.svg);
+  left: 0;
 }
 
-
+.change_btn:hover,
+.delete_btn:hover {
+    color: #9873FF;
+}
 
 .date {
-    padding-right: 7px;
+  padding-right: 7px;
 }
 
 .contacts-wrapper {
-    display: flex;
-    width: 108px;
-    flex-wrap: wrap;
-    gap: 7px;
-    a {
-        width: 16px;
-        height: 16px;
+  display: flex;
+  width: 108px;
+  flex-wrap: wrap;
+  gap: 7px;
+  a {
+    width: 16px;
+    height: 16px;
+    svg:hover {
+        g {
+            transition: all .3s ease-in;
+            opacity: 1;
+        }
     }
+  }
+
 }
 
 .contacts {
-    width: 162px;
+  width: 162px;
 }
 
 .id {
-    font-weight: 400;
-font-size: 12px;
-line-height: 16px;
-width: 100px;
-padding-left: 20px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  width: 100px;
+  padding-left: 20px;
 }
 
 .fullname {
-    width: 360px;
+  width: 360px;
 }
 
-.time_created{
-    width: 170px;
+.time_created {
+  width: 170px;
 }
-
 
 .time_changed {
-    width: 160px;
+  width: 160px;
 }
 
 .btn_wrapper {
-    width: 207px;
+  width: 207px;
+}
+
+.mail:hover {
+    path {
+        opacity: 1;
+    }
 }

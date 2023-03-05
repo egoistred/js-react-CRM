@@ -31,7 +31,6 @@ export function CRMElement({
     let id = document.getElementById(`${client.id}`);
     getId(id?.id);
     getClient(client);
-    console.log(client);
   }
 
   function getDate(fullTime: string) {
@@ -93,6 +92,13 @@ export function CRMElement({
               />
             ) : contact.type === "Facebook" ? (
               <ContactFbIcon
+                key={i}
+                content={`${contact.value}`}
+                type={`${contact.value}`}
+                id={client.id}
+              />
+            ) : contact.type === "Другое" ? (
+              <ContactDefaultIcon
                 key={i}
                 content={`${contact.value}`}
                 type={`${contact.value}`}

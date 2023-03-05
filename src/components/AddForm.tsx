@@ -13,6 +13,7 @@ const options = [
   { value: "Email", label: "Email" },
   { value: "VK", label: "Vk" },
   { value: "Facebook", label: "Facebook" },
+  { value: "Другое", label: "Другое" },
 ];
 
 const contactsArr: number[] = [];
@@ -52,7 +53,7 @@ export function AddForm({
       lastName: "",
       contacts: [
         {
-          type: "Телефон  ",
+          type: "Телефон",
           value: "",
         },
       ],

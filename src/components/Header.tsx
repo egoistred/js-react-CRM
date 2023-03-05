@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Search } from "./Search";
 
-export function Header() {
+export function Header({clients , setSearchResults}) {
   return (
     <header className="header">
       <a href="" className="header__logo">
@@ -18,7 +18,7 @@ export function Header() {
           />
         </svg>
       </a>
-      <Search></Search>
+      <Search clients={clients} setSearchResults={setSearchResults}></Search>
     </header>
   );
 }

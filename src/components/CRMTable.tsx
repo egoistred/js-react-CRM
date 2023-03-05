@@ -15,13 +15,13 @@ export interface Client {
 }
 
 export function CRMTable({
-  clients,
+  searchResults,
   setDeleteModal,
   setChangeModal,
   getId,
   getClient,
 }: {
-  clients: Client[];
+  searchResults: Client[];
   setDeleteModal: Function;
   setChangeModal: Function;
   getId: Function;
@@ -31,8 +31,8 @@ export function CRMTable({
     <table className="table">
       <CRMHeading />
       <tbody className="tbody">
-        {clients.length > 0 &&
-          clients.map((client: Client) => (
+        {searchResults.length > 0 &&
+          searchResults.map((client: Client) => (
             <CRMElement
               client={client}
               setDeleteModal={() => setDeleteModal()}

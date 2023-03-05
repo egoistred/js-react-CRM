@@ -14,9 +14,10 @@ function App() {
   const [deleteModal, setDeleteModal] = useState(false);
   const [changeModal, setChangeModal] = useState(false);
   const [clients, setClients] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [id, setId] = useState("");
   const [client, setClient] = useState({});
-  
+
   const getId = (newId: string) => {
     setId(newId);
   };
@@ -25,7 +26,6 @@ function App() {
     setClient(client);
   };
 
-
   useEffect(() => {
     getClients();
   }, []);
@@ -33,17 +33,18 @@ function App() {
   async function getClients() {
     const clients: [] = await ky("http://localhost:3000/api/clients").json();
     setClients(clients);
+    setSearchResults(clients);
   }
 
   return (
     <>
-      <Header />
+      <Header clients={clients} setSearchResults={setSearchResults} />
       <main>
         <section className="crm">
           <div className="container">
             <h1 className="heading">Клиенты</h1>
             <CRMTable
-              clients={clients}
+              searchResults={searchResults}
               setDeleteModal={() => setDeleteModal(true)}
               setChangeModal={() => setChangeModal(true)}
               getId={getId}
@@ -57,7 +58,11 @@ function App() {
               <DeleteForm id={id} getClients={getClients} clients={clients} />
             </Modal>
             <Modal open={changeModal} onClose={() => setChangeModal(false)}>
-              <ChangeForm client={client} getClients={getClients} clients={clients} />
+              <ChangeForm
+                client={client}
+                getClients={getClients}
+                clients={clients}
+              />
             </Modal>
           </div>
         </section>

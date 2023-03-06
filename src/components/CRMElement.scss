@@ -34,6 +34,9 @@
   padding-left: 18px;
   cursor: pointer;
   transition: color 0.2s ease-in-out;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
 }
 
 .change_btn {
@@ -60,7 +63,7 @@
 
 .change_btn:hover,
 .delete_btn:hover {
-    color: #9873FF;
+  color: #9873ff;
 }
 
 .date {
@@ -72,17 +75,17 @@
   width: 108px;
   flex-wrap: wrap;
   gap: 7px;
+  padding-left: 10px;
   a {
     width: 16px;
     height: 16px;
     svg:hover {
-        g {
-            transition: all .3s ease-in;
-            opacity: 1;
-        }
+      g {
+        transition: all 0.3s ease-in;
+        opacity: 1;
+      }
     }
   }
-
 }
 
 .contacts {
@@ -114,7 +117,7 @@
 }
 
 .mail:hover {
-    path {
-        opacity: 1;
-    }
+  path {
+    opacity: 1;
+  }
 }

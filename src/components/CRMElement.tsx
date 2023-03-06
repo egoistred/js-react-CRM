@@ -55,7 +55,7 @@ export function CRMElement({
 
   return (
     <tr id={client.id} className="table_row">
-      <td className="id">{client.id.slice(0, 6)}</td>
+      <td className="id">{client.id.slice(-6)}</td>
       <td className="fullname">{`${client.surname} ${client.name} ${client.lastName}`}</td>
       <td className="time_created">
         <span className="date">{getDate(client.createdAt)}</span>

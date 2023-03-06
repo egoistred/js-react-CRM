@@ -9,13 +9,14 @@ export interface Client {
   surname: string;
   lastName: string;
   contacts?: {
-     type: string,
-     value: string 
-}[];
+    type: string;
+    value: string;
+  }[];
 }
 
 export function CRMTable({
   searchResults,
+  setSearchResults,
   setDeleteModal,
   setChangeModal,
   getId,
@@ -24,12 +25,16 @@ export function CRMTable({
   searchResults: Client[];
   setDeleteModal: Function;
   setChangeModal: Function;
+  setSearchResults: Function;
   getId: Function;
   getClient: Function;
 }) {
   return (
     <table className="table">
-      <CRMHeading />
+      <CRMHeading
+        searchResults={searchResults}
+        setSearchResults={setSearchResults}
+      />
       <tbody className="tbody">
         {searchResults.length > 0 &&
           searchResults.map((client: Client) => (

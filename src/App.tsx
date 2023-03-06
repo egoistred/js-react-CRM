@@ -45,6 +45,7 @@ function App() {
             <h1 className="heading">Клиенты</h1>
             <CRMTable
               searchResults={searchResults}
+              setSearchResults={setSearchResults}
               setDeleteModal={() => setDeleteModal(true)}
               setChangeModal={() => setChangeModal(true)}
               getId={getId}

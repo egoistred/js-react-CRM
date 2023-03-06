@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Search } from "./Search";
+import { Client } from "./CRMTable";
 
-export function Header({clients , setSearchResults}) {
+export function Header({clients , setSearchResults}: {clients: Client, setSearchResults: Function}) {
   return (
     <header className="header">
       <a href="" className="header__logo">

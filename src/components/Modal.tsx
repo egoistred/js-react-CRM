@@ -10,8 +10,8 @@ export function Modal({ children, open, onClose }: Modal) {
   if (!open) return null;
   return (
     <>
-      <div className="modal__bg">
-        <div className="modal">
+      <div onClick={onClose} className="modal__bg">
+        <div onClick={(e) => e.stopPropagation()} className="modal">
           <button onClick={onClose} className="modal__close">
             <svg
               width="29"

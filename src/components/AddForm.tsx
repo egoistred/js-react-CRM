@@ -21,9 +21,11 @@ const contactsArr: number[] = [];
 export function AddForm({
   clients,
   setClients,
+  onClose
 }: {
   clients: Client[];
   setClients: Function;
+  onClose: ()=> void;
 }) {
   const SignupSchema = Yup.object().shape({
     surname: Yup.string()
@@ -153,7 +155,7 @@ export function AddForm({
         <button className="form__submit" type="submit">
           Сохранить
         </button>
-        <a href="">Отмена</a>
+        <button onClick={onClose}>Отмена</button>
       </form>
     </>
   );

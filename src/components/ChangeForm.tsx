@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Select from "react-select";
 import ky from "ky";
 import { Client } from "./CRMTable";
@@ -15,14 +15,18 @@ const options = [
   { value: "Другое", label: "Другое" },
 ];
 
+
+
 export default function ChangeForm({
   getClients,
   clients,
   client,
+  onClose,
 }: {
   getClients: Function;
   clients: Client[];
   client: Client;
+  onClose: () => void;
 }) {
   const SignupSchema = Yup.object().shape({
     surname: Yup.string()
@@ -66,21 +70,16 @@ export default function ChangeForm({
     },
   });
 
-  let contactsArr: number[] = [];
-  for (let i = 0; i < client?.contacts?.length; i++) {
-    contactsArr.push(i);
-  }
-
+  const [addContact, setAddContact] = useState(1);
+  
   function addHandler(event: any) {
     event.preventDefault();
-    contactsArr.push(1)
+    setAddContact(addContact + 1);
     let newContact = {
       type: "",
       value: "",
     };
-    if (formik.values.contacts.length > 1) {
-      formik.values.contacts = [...formik.values.contacts, newContact];
-    }
+    formik.values.contacts = [...formik.values.contacts, newContact];  
   }
 
   return (
@@ -118,26 +117,26 @@ export default function ChangeForm({
           type="text"
         />
         <div className={`select-wrapper show`}>
-          {contactsArr.map((contact, i) => (
-            <>
-              <Select
-                defaultValue={options[0]}
-                options={options}
-                name={`contacts[${i}].type`}
-                onChange={(selected) =>
-                  formik.setFieldValue(`contacts[${i}].type`, selected?.value)
-                }
-                key={i}
-              />
-              <input
-                type="text"
-                onChange={formik.handleChange}
-                name={`contacts[${i}].value`}
-                value={formik.values.contacts[i].value}
-              />
-              <button>&times;</button>
-            </>
-          ))}
+          {formik.values.contacts.map((contact, i) => (
+              <>
+                <Select
+                  defaultValue={options[0]}
+                  options={options}
+                  name={`contacts[${i}].type`}
+                  onChange={(selected) =>
+                    formik.setFieldValue(`contacts[${i}].type`, selected?.value)
+                  }
+                  key={i}
+                />
+                <input
+                  type="text"
+                  onChange={formik.handleChange}
+                  name={`contacts[${i}].value`}
+                  value={formik.values.contacts[i].value}
+                />
+                <button>&times;</button>
+              </>
+            ))}
         </div>
 
         <a href="" onClick={addHandler}>
@@ -160,7 +159,7 @@ export default function ChangeForm({
         <button className="form__submit" type="submit">
           Сохранить
         </button>
-        <a href="">Отмена</a>
+        <button onClick={onClose}>Отмена</button>
       </form>
     </>
   );

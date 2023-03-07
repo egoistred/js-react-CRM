@@ -53,16 +53,26 @@ function App() {
             />
             <AddButton onClick={() => setAddModal(true)} />
             <Modal open={addModal} onClose={() => setAddModal(false)}>
-              <AddForm clients={clients} setClients={setClients} />
+              <AddForm
+                clients={clients}
+                setClients={setClients}
+                onClose={() => setAddModal(false)}
+              />
             </Modal>
             <Modal open={deleteModal} onClose={() => setDeleteModal(false)}>
-              <DeleteForm id={id} getClients={getClients} clients={clients} />
+              <DeleteForm
+                id={id}
+                getClients={getClients}
+                clients={clients}
+                onClose={() => setDeleteModal(false)}
+              />
             </Modal>
             <Modal open={changeModal} onClose={() => setChangeModal(false)}>
               <ChangeForm
                 client={client}
                 getClients={getClients}
                 clients={clients}
+                onClose={() => setChangeModal(false)}
               />
             </Modal>
           </div>

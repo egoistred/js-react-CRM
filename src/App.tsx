@@ -17,6 +17,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [id, setId] = useState("");
   const [client, setClient] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const getId = (newId: string) => {
     setId(newId);
@@ -31,9 +32,11 @@ function App() {
   }, []);
 
   async function getClients() {
+    setIsLoading(true)
     const clients: [] = await ky("http://localhost:3000/api/clients").json();
     setClients(clients);
     setSearchResults(clients);
+    setIsLoading(false);
   }
 
   return (
@@ -55,14 +58,14 @@ function App() {
             <Modal open={addModal} onClose={() => setAddModal(false)}>
               <AddForm
                 clients={clients}
-                setClients={setClients}
+                setSearchResults={setSearchResults}
                 onClose={() => setAddModal(false)}
               />
             </Modal>
             <Modal open={deleteModal} onClose={() => setDeleteModal(false)}>
               <DeleteForm
                 id={id}
-                getClients={getClients}
+                setSearchResults={setSearchResults}
                 clients={clients}
                 onClose={() => setDeleteModal(false)}
               />
@@ -71,6 +74,7 @@ function App() {
               <ChangeForm
                 client={client}
                 getClients={getClients}
+                setSearchResults={setSearchResults}
                 clients={clients}
                 onClose={() => setChangeModal(false)}
               />

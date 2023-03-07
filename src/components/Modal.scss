@@ -3,7 +3,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 227px;
+    padding-top: 50px;
     top: 0;
     left: 0;
     right: 0;
@@ -23,8 +23,8 @@
 
 .modal__close {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 15px;
+    right: 15px;
     background-color: transparent;
     border: 0;
 }

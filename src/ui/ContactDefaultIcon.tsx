@@ -1,7 +1,7 @@
 import React from "react";
 import { Tooltip } from "react-tooltip";
 
-function ContactDefaultIcon({content}: any) {
+function ContactDefaultIcon({content, type, id}: any) {
   return (
     <>
     <svg
@@ -10,7 +10,7 @@ function ContactDefaultIcon({content}: any) {
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="tooltip"
+      className={`default tooltip-default${id}`}
     >
       <path
         fillRule="evenodd"
@@ -19,7 +19,7 @@ function ContactDefaultIcon({content}: any) {
         fill="#9873FF"
       />
     </svg>
-    <Tooltip anchorSelect=".tooltip" content={content}/>
+    <Tooltip anchorSelect={`.tooltip-default${id}`} content={content}/>
     </>
   );
 }

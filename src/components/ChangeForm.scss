@@ -49,9 +49,21 @@
     padding: 25px 30px;
     margin-left: -30px;
     margin-right: -30px;
+    gap: 15px;
+    margin-bottom: 25px;
     background-color: #e7e5eb;
     input {
+      outline: none;
       flex-grow: 1;
+      border: none;
+      border-top: 1px solid #c8c5d1;
+      border-bottom: 1px solid #c8c5d1;
+      background-color: transparent;
+    }
+    a {
+      border: 1px solid #c8c5d1;
+      width: 27px;
+      padding-top: 7px;
     }
   }
   .select-wrapper.show {
@@ -124,5 +136,13 @@
     display: flex;
   }
   
+  .delete__client {
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    text-decoration: underline;
+    color: #333333;
+  }
   
   

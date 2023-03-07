@@ -1,5 +1,6 @@
 import { CRMHeading } from "./CRMHeading";
 import { CRMElement } from "./CRMElement";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 export interface Client {
   id: string;
@@ -21,6 +22,7 @@ export function CRMTable({
   setChangeModal,
   getId,
   getClient,
+  isLoading
 }: {
   searchResults: Client[];
   setDeleteModal: Function;
@@ -28,8 +30,10 @@ export function CRMTable({
   setSearchResults: Function;
   getId: Function;
   getClient: Function;
+  isLoading: boolean;
 }) {
   return (
+    <>
     <table className="table">
       <CRMHeading
         searchResults={searchResults}
@@ -50,5 +54,8 @@ export function CRMTable({
           ))}
       </tbody>
     </table>
+    <div>
+    </div>
+    </>
   );
 }

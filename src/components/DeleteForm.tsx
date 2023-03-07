@@ -24,7 +24,7 @@ function DeleteForm({
       <h2>Удвлить клиента</h2>
       <p>Вы действительно хотите удалить данного клиента?</p>
       <button onClick={handleDelete}>Удалить</button>
-      <button onClick={onClose}>отмена</button>
+      <button onClick={onClose}>Отмена</button>
     </>
   );
 }

@@ -2,8 +2,8 @@
   position: relative;
   max-width: 216px;
   max-height: 44px;
-  padding: 12px 24px;
-  padding-left: 35px;
+  padding: 12px 11px;
+  padding-left: 45px;
   border: 1px solid #9873ff;
   font-family: "Open Sans";
   font-size: 14px;
@@ -17,5 +17,18 @@
     fill: currentColor;
     left: 4px;
   }
+}
+
+.btn:hover {
+  color: #7B61FF;
+}
+
+.btn::before {
+  position: absolute;
+  content: '';
+  width: 22px;
+  height: 16px;
+  left: 13px;
+  background-image: url(../assets/add_preson.svg);
 }
 

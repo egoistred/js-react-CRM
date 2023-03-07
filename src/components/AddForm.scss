@@ -42,19 +42,34 @@
   cursor: pointer;
 }
 
-.select-wrapper {
-  display: none;
+.select-wrapper--add {
+  display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   width: 450px;
-  padding: 25px 30px;
+  padding: 10px 30px;
   margin-left: -30px;
   margin-right: -30px;
-  background-color: #e7e5eb;
+
+  background: rgba(200, 197, 209, 0.2);
+  box-shadow: (0px 4px 4px rgba(0, 0, 0, 0.25));
   input {
     flex-grow: 1;
   }
 }
-.select-wrapper.show {
+
+.select-wrapper--add.show {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.select {
+  display: none;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+.select.show {
   display: flex;
 }
 
@@ -63,8 +78,47 @@
   position: relative;
   width: 100%;
   max-width: 123px;
-  border: 1px solid #c8c5d1;
+  border: 1px solid rgba(200, 197, 209, 0.2);
 }
+
+.select__input {
+  display: flex;
+  flex-grow: 1;
+  input {
+    border: none;
+    border-top: 1px solid #c8c5d1;
+    border-bottom: 1px solid #c8c5d1;
+    background-color: transparent;
+  }
+  a {
+    border: 1px solid #c8c5d1;
+    width: 27px;
+    padding-top: 7px;
+  }
+}
+
+.select__input__select {
+  width: 123px;
+}
+
+.addcontact {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  color: #333333;
+}
+
+.addcontact::before {
+  position: absolute;
+  content: "";
+  width: 14px;
+  height: 14px;
+  left: 105px;
+  top: 4px;
+  background-image: url(../assets/add_contact.svg);
+  background-repeat: no-repeat;
+}
+
 .value {
   width: 100%;
   text-align: center;
@@ -84,7 +138,7 @@
   width: 100%;
   list-style: none;
   color: #333333;
-  background-color: #F4F3F6;
+  background-color: #f4f3f6;
 }
 
 .options.show {
@@ -96,7 +150,7 @@
   height: 6px;
   right: 6px;
   top: 8px;
-  border: 1px solid #9873FF;
+  border: 1px solid #9873ff;
   border-bottom: 0;
   border-right: 0;
   transform: rotate(225deg);
@@ -109,7 +163,7 @@
 }
 
 .option.highlighted {
-  background-color: #C8C5D1;
+  background-color: #c8c5d1;
 }
 
 .errors {
@@ -117,9 +171,18 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
-  color: #F06A4D;
+  color: #f06a4d;
 }
 
 .errors.show {
   display: flex;
+}
+
+.cancel {
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: underline;
+  color: #333333;
 }
